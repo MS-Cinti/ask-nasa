@@ -1,0 +1,170 @@
+body{
+  background-color: #000000;
+  font-family: 'Garamond', serif;
+  color: #ffffff;
+}
+
+#root{
+  position: relative;
+  height: 100%;
+  max-width: 100%;
+}
+
+.title {
+  width: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 50px;
+}
+
+.block {
+  width: 5%;
+  height: inherit;
+  background: #fc0;
+  position: absolute;
+  animation: mainBlock 2s cubic-bezier(.74, .06, .4, .92) forwards;
+  display: flex;
+}
+
+@keyframes mainBlock {
+  0% {
+    width: 0%;
+    left: 0;
+
+  }
+  50% {
+    width: 100%;
+    left: 0;
+
+  }
+  100% {
+    width: 0;
+    left: 100%;
+  }
+}
+
+#root h1{
+  margin-left: 3vw;
+  margin-top: 2vw;
+  font-size: 2vw;
+  text-transform: uppercase;
+  letter-spacing: 0.4vw;
+  text-align: center; 
+  animation: mainFadeIn 2s forwards;
+  animation-delay: 1.6s;
+  opacity: 0;
+  display: flex;
+  align-items: baseline;
+  position: relative;
+}
+
+@keyframes mainFadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+#root h2{
+  width: fit-content;
+  margin-top: 5vw;
+  margin-left: 20px;
+  margin-bottom: 110px;
+  font-size: 1.5vw;
+  padding: 1vw;
+  border: solid 3px #fc0;
+  animation: 1.5s ease-in-out both running appearBorder;
+}
+
+@keyframes appearBorder {
+  0% {
+    border-right-color: #222423;
+    border-bottom-color: #222423;
+    border-left-color: #222423;
+    border-top-color: #222423;
+  }
+  25% {
+    border-right-color: #222423;
+    border-bottom-color: #222423;
+    border-left-color: #222423;
+    border-top-color: #fc0;
+  }
+  50% {
+    border-right-color: #fc0;
+    border-bottom-color: #222423;
+    border-left-color: #222423;
+    border-top-color: #fc0;
+  }
+  75% {
+    border-right-color: #fc0;
+    border-bottom-color: #fc0;
+    border-left-color: #222423;
+    border-top-color: #fc0;
+  }
+  100% {
+    border-right-color: #fc0;
+    border-bottom-color: #fc0;
+    border-left-color: #fc0;
+    border-top-color: #fc0;
+  }
+}
+
+#root p{
+  border: transparent;
+  width: 800px;
+  height: 800px;
+  padding: 10px;
+  margin-left: 20px;
+  text-align: justify;
+  font-size: 1vw;
+  text-indent: 2vw;
+  line-height: 1.7vw;
+}
+
+#img{
+  position: absolute;
+  left: 50%;
+  bottom: 10%;
+  height: 1000px;
+  width: 1000px;
+  object-fit: scale-down;
+}
+
+#video{
+  position: absolute;
+  left: 50%;
+  bottom: 30%;
+  height: 50%;
+  width: 50%;
+  border: transparent;
+}
+
+#root form{
+  position: absolute;
+  font-family: 'Garamond', serif;
+  font-size: 1vw;
+  left: 67%;
+  bottom: 10%;   
+}
+
+#root form select{
+  display: inline-block;
+  font-size: 1vw;
+  height: 2vw;
+  width: 12vw;
+  margin: 8px 0;
+  transition: 0.1s;
+  outline: none;
+  border-radius: 4px;   
+}
+
+#root form select:focus{
+  border: 3px solid #555;
+}
+
+#datePicker{
+  z-index: 99;
+}
