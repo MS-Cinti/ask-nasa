@@ -1,11 +1,8 @@
 body{
+  position: relative;
   background-color: #000000;
   font-family: 'Garamond', serif;
   color: #ffffff;
-}
-
-#root{
-  position: relative;
   height: 100%;
   max-width: 100%;
 }
@@ -44,7 +41,7 @@ body{
   }
 }
 
-#root h1{
+.title h1{
   margin-left: 3vw;
   margin-top: 2vw;
   font-size: 2vw;
@@ -68,7 +65,7 @@ body{
   }
 }
 
-#root h2{
+#container h2{
   width: fit-content;
   margin-top: 5vw;
   margin-left: 20px;
@@ -112,10 +109,10 @@ body{
   }
 }
 
-#root p{
+#container p{
   border: transparent;
-  width: 800px;
-  height: 800px;
+  width: 900px;
+  height: 100%;
   padding: 10px;
   margin-left: 20px;
   text-align: justify;
@@ -124,13 +121,17 @@ body{
   line-height: 1.7vw;
 }
 
-#img{
+#imgContainer{
   position: absolute;
+  top: 50%;
   left: 50%;
-  bottom: 10%;
-  height: 1000px;
-  width: 1000px;
+  transform: translate(50%, -30%);
+}
+
+#img{
   object-fit: scale-down;
+  height: 500px;
+  width: 500px;
 }
 
 #video{
@@ -142,15 +143,19 @@ body{
   border: transparent;
 }
 
-#root form{
+#datePicker{
   position: absolute;
+  top: 100%;
+  left: 65%;
+  transform: translate(25%, 70%);
+  height: 2vh;
+  max-width: 100%;
+  z-index: 99;
   font-family: 'Garamond', serif;
   font-size: 1vw;
-  left: 67%;
-  bottom: 10%;   
 }
 
-#root form select{
+#datePicker select{
   display: inline-block;
   font-size: 1vw;
   height: 2vw;
@@ -161,10 +166,6 @@ body{
   border-radius: 4px;   
 }
 
-#root form select:focus{
+#datePicker select:focus{
   border: 3px solid #555;
-}
-
-#datePicker{
-  z-index: 99;
 }

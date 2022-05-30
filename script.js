@@ -5,9 +5,11 @@ const htmlBodyWithImg = (title, explanation, img) => {
             <span class="block"></span>
             <h1>What happened in space?</h1>
         </div>
-        <h2 id="h2">${title}</h2>
-        <p id="p">${explanation}</p>
-        <img id="img" src="${img}"></img>
+        <h2>${title}</h2>
+        <p>${explanation}</p>
+        <div id="imgContainer">
+            <img id="img" src="${img}"></img>
+        </div>
     </div>
     `;
 };
@@ -19,8 +21,8 @@ const htmlBodyWithVideo = (title, explanation, video) => {
             <span class="block"></span>
             <h1>What happened in space?</h1>
         </div>
-        <h2 id="h2">${title}</h2>
-        <p id="p">${explanation}</p>
+        <h2>${title}</h2>
+        <p>${explanation}</p>
         <iframe id="video" src="${video}"></iframe>
     </div>
 `;
@@ -58,7 +60,7 @@ const todayFetch = async () => {
 
     const date = today.getFullYear() + '-' + (today.getMonth()+1) + '-' + today.getDate();
 
-    console.log(date)
+    //console.log(date)
     
     const requestedDate = date; //pl 2022-4-8
     
@@ -68,10 +70,12 @@ const todayFetch = async () => {
 
     const apodJson = await apod.json();
 
+    console.log(apodJson)
+
     if (apodJson.media_type === "video"){
         rootElement.insertAdjacentHTML("beforeend", htmlBodyWithVideo(apodJson.title, apodJson.explanation, apodJson.url));
     }else{
-        rootElement.insertAdjacentHTML("beforeend", htmlBodyWithImg(apodJson.title, apodJson.explanation, apodJson.hdurl));
+        rootElement.insertAdjacentHTML("beforeend", htmlBodyWithImg(apodJson.title, apodJson.explanation, apodJson.url));
     }
 }
 
@@ -102,7 +106,7 @@ const chosenDateFetch = async () => {
     if (apodJson.media_type === "video"){
         rootElement.insertAdjacentHTML("beforeend", htmlBodyWithVideo(apodJson.title, apodJson.explanation, apodJson.url));
     }else{
-        rootElement.insertAdjacentHTML("beforeend", htmlBodyWithImg(apodJson.title, apodJson.explanation, apodJson.hdurl));
+        rootElement.insertAdjacentHTML("beforeend", htmlBodyWithImg(apodJson.title, apodJson.explanation, apodJson.url));
     }
 }
 
@@ -118,8 +122,6 @@ function loadEvent() {
     const picker = document.getElementById("datePick");
 
     picker.addEventListener("change", chosenDateFetch);
-
-
 }
 
 window.addEventListener("load", loadEvent);
