@@ -1,104 +1,30 @@
-/* const htmlBodyWithImg = (title, explanation, img) => {
+const text = (title, explanation) => {
     return `
     <div id="container">
-        <div class="title">
-            <span class="block"></span>
-            <h1>What happened in space?</h1>
+        <div class="dailyTitle">
+            <h2>${title}</h2>
         </div>
-        <h2>${title}</h2>
-        <p>${explanation}</p>
-        <div id="imgContainer">
-            <img id="img" src="${img}"></img>
-        </div>
-    </div>
-    `;
-}; */
-
-const htmlBodyWithImg = (title, explanation, img) => {
-    return `
-    <div class="mainTitle">
-        <span class="block"></span>
-        <h1>What happened in space?</h1>
-    </div>
-    <div id="container">
-        <div id="contentLeft">
-            <div class="dailyTitle">
-                <h2>${title}</h2>
-            </div>
-            <div class="paragraph">
-                <p>${explanation}</p>
-            </div>
-        </div>
-        <div id="contentRight">
-            <div id="mediaContainer">
-                <img src="${img}"></img>
-            </div>
-            <div id="datePickerContainer"></div>        
+        <div class="paragraph">
+            <p>${explanation}</p>
         </div>
     </div>
     `;
 };
 
-/* const htmlBodyWithVideo = (title, explanation, video) => {
+const image = (img) => {
     return `
-    <div id="container">
-        <div class="title">
-            <span class="block"></span>
-            <h1>What happened in space?</h1>
+        <div id="mediaContainer">
+            <img src="${img}"></img>
         </div>
-        <h2>${title}</h2>
-        <p>${explanation}</p>
-        <iframe id="video" src="${video}"></iframe>
-    </div>
-`;
-}; */
+    `
+}
 
-const htmlBodyWithVideo = (title, explanation, video) => {
+const video = (video) => {
     return `
-    <div class="mainTitle">
-        <span class="block"></span>
-        <h1>What happened in space?</h1>
+    <div id="mediaContainer">
+        <iframe src="${video}"></iframe>
     </div>
-    <div id="contentContainer">
-        <div id="contentLeft">
-            <div class="dailyTitle">
-                <h2>${title}</h2>
-            </div>
-            <div class="paragraph">
-                <p>${explanation}</p>
-            </div>
-        </div>
-        <div id="contentRight">
-            <div id="mediaContainer">
-                <iframe src="${video}"></iframe>
-            </div>
-            <div id="datePickerContainer"></div>        
-        </div>
-    </div>
-    `;
-};
-
-const datePicker = () => {
-    
-    const today = new Date();
-
-    let date = today.getFullYear() + '-' + (today.getMonth()+1) + '-' + today.getDate();
-
-    if (today.getMonth()+1<10) {
-        date = today.getFullYear() + '-0' + (today.getMonth()+1) + '-' + today.getDate();        
-    }
-
-    const datePickerHTML = document.getElementById("datePickerContainer");
-
-    datePickerHTML = `
-        <form class="datePicker">
-            <label for="datePick">Choose a day:</label>
-            <input type="date" id="datePick" name="datePick"
-            min="1995-06-16" max=${date}>
-        </form>
-    `;
-
-    return datePickerHTML
+    `
 }
 
 //A function to fetch when the page loads
@@ -122,19 +48,54 @@ const todayFetch = async () => {
 
     const apodJson = await apod.json();
 
-    console.log(apodJson)
+    //console.log(apodJson)
+
+    const contentRight = document.getElementById("contentRight")
 
     if (apodJson.media_type === "video"){
-        rootElement.insertAdjacentHTML("beforeend", htmlBodyWithVideo(apodJson.title, apodJson.explanation, apodJson.url));
+        contentRight.insertAdjacentHTML("beforeend", video(apodJson.url));
     }else{
-        rootElement.insertAdjacentHTML("beforeend", htmlBodyWithImg(apodJson.title, apodJson.explanation, apodJson.url));
+        contentRight.insertAdjacentHTML("beforeend", image(apodJson.url));
     }
+
+    const contentLeft = document.getElementById("contentLeft")
+
+    contentLeft.insertAdjacentHTML("beforeend", text(apodJson.title, apodJson.explanation))
+}
+
+const datePicker = () => {
+    
+    const today = new Date();
+
+    let date = today.getFullYear() + '-' + (today.getMonth()+1) + '-' + today.getDate();
+
+    if (today.getMonth()+1<10) {
+        date = today.getFullYear() + '-0' + (today.getMonth()+1) + '-' + today.getDate();        
+    }
+
+    let datePickerHTML = document.getElementById("datePickerContainer");
+
+    datePickerHTML =
+    `
+        <div id="datePickerContainer">
+            <form class="datePicker">
+                <label for="datePick">Choose a day:</label>
+                <input type="date" id="datePick" name="datePick"
+                min="1995-06-16" max=${date}>
+            </form>
+        </div>        
+    `;
+
+    return datePickerHTML
 }
 
 //A function to get the value of the datepicker
 const getValueOfPicker = () => {
+
     const picker = document.getElementById("datePick");
+
     const valueOfPicker = picker.value;
+
     return valueOfPicker;
 }
 
@@ -162,18 +123,33 @@ const chosenDateFetch = async () => {
     }
 }
 
-function loadEvent() {
-    console.log("load");
+const contentLeftAndRight = () => {
+    return `
+        <div class="mainTitle">
+            <span class="mainTitleLoader"></span>
+            <h1>What happened in space?</h1>
+        </div>
+        <div id="contentLeft"></div>
+        <div id="contentRight"></div>
+    `
+}
 
+const loadEvent = () => {
+
+    console.log("page is loaded");
+
+    let rootElement = document.getElementById("root");
+
+    rootElement.insertAdjacentHTML("beforeend", contentLeftAndRight())
+    
     todayFetch();
+    
+    let contentRight = document.getElementById("contentRight");
+    
+    contentRight.insertAdjacentHTML("afterend", datePicker());
+    //console.log(datePickerHTML)
 
-/*     let rootElement = document.getElementById("root");
- */
-    const datePickerHTML = document.getElementById("datePickerContainer");
-
-    datePickerHTML.insertAdjacentHTML("afterend", datePicker());
-
-    const picker = document.getElementById("datePick");
+    let picker = document.getElementById("datePick");
 
     picker.addEventListener("change", chosenDateFetch);
 }

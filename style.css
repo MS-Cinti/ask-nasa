@@ -17,16 +17,16 @@ body{
   height: 50px;
 }
 
-.block {
+.mainTitleLoader {
   width: 5%;
   height: inherit;
   background: #fc0;
   position: absolute;
-  animation: mainBlock 2s cubic-bezier(.74, .06, .4, .92) forwards;
+  animation: mainTitleLoader 2s cubic-bezier(.74, .06, .4, .92) forwards;
   display: flex;
 }
 
-@keyframes mainBlock {
+@keyframes mainTitleLoader {
   0% {
     width: 0%;
     left: 0;
@@ -157,7 +157,7 @@ body{
   border: transparent;
 }
 
-.datePicker{
+#datePickerContainer .datePicker{
   position: absolute;
   top: 80%;
   left: 64%;
@@ -169,7 +169,7 @@ body{
   font-size: 1vw;
 }
 
-.datePicker select{
+#datePickerContainer .datePicker select{
   display: inline-block;
   font-size: 1vw;
   height: 2vw;
@@ -180,6 +180,6 @@ body{
   border-radius: 4px;   
 }
 
-.datePicker select:focus{
+#datePickerContainer .datePicker select:focus{
   border: 3px solid #555;
 }
