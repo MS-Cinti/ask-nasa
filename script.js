@@ -1,4 +1,4 @@
-const htmlBodyWithImg = (title, explanation, img) => {
+/* const htmlBodyWithImg = (title, explanation, img) => {
     return `
     <div id="container">
         <div class="title">
@@ -12,9 +12,34 @@ const htmlBodyWithImg = (title, explanation, img) => {
         </div>
     </div>
     `;
+}; */
+
+const htmlBodyWithImg = (title, explanation, img) => {
+    return `
+    <div class="mainTitle">
+        <span class="block"></span>
+        <h1>What happened in space?</h1>
+    </div>
+    <div id="container">
+        <div id="contentLeft">
+            <div class="dailyTitle">
+                <h2>${title}</h2>
+            </div>
+            <div class="paragraph">
+                <p>${explanation}</p>
+            </div>
+        </div>
+        <div id="contentRight">
+            <div id="mediaContainer">
+                <img src="${img}"></img>
+            </div>
+            <div id="datePickerContainer"></div>        
+        </div>
+    </div>
+    `;
 };
 
-const htmlBodyWithVideo = (title, explanation, video) => {
+/* const htmlBodyWithVideo = (title, explanation, video) => {
     return `
     <div id="container">
         <div class="title">
@@ -26,6 +51,31 @@ const htmlBodyWithVideo = (title, explanation, video) => {
         <iframe id="video" src="${video}"></iframe>
     </div>
 `;
+}; */
+
+const htmlBodyWithVideo = (title, explanation, video) => {
+    return `
+    <div class="mainTitle">
+        <span class="block"></span>
+        <h1>What happened in space?</h1>
+    </div>
+    <div id="contentContainer">
+        <div id="contentLeft">
+            <div class="dailyTitle">
+                <h2>${title}</h2>
+            </div>
+            <div class="paragraph">
+                <p>${explanation}</p>
+            </div>
+        </div>
+        <div id="contentRight">
+            <div id="mediaContainer">
+                <iframe src="${video}"></iframe>
+            </div>
+            <div id="datePickerContainer"></div>        
+        </div>
+    </div>
+    `;
 };
 
 const datePicker = () => {
@@ -38,12 +88,14 @@ const datePicker = () => {
         date = today.getFullYear() + '-0' + (today.getMonth()+1) + '-' + today.getDate();        
     }
 
-    const datePickerHTML = `
-    <form id="datePicker">
-        <label for="datePick">Choose a day:</label>
-        <input type="date" id="datePick" name="datePick"
-        min="1995-06-16" max=${date}>
-    </form>
+    const datePickerHTML = document.getElementById("datePickerContainer");
+
+    datePickerHTML = `
+        <form class="datePicker">
+            <label for="datePick">Choose a day:</label>
+            <input type="date" id="datePick" name="datePick"
+            min="1995-06-16" max=${date}>
+        </form>
     `;
 
     return datePickerHTML
@@ -111,13 +163,15 @@ const chosenDateFetch = async () => {
 }
 
 function loadEvent() {
-    console.log("Load");
+    console.log("load");
 
     todayFetch();
 
-    let rootElement = document.getElementById("root");
+/*     let rootElement = document.getElementById("root");
+ */
+    const datePickerHTML = document.getElementById("datePickerContainer");
 
-    rootElement.insertAdjacentHTML("beforeend", datePicker());
+    datePickerHTML.insertAdjacentHTML("afterend", datePicker());
 
     const picker = document.getElementById("datePick");
 
