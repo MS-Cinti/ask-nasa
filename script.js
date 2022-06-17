@@ -1,19 +1,28 @@
+const contentLeftAndRight = () => {
+    return `
+        <div class="mainTitle">
+            <span class="mainTitleLoader"></span>
+            <h1>What happened in space?</h1>
+        </div>
+        <div id="contentLeft"></div>
+        <div id="contentRight"></div>
+    `
+}
+
 const text = (title, explanation) => {
     return `
-    <div id="container">
-        <div class="dailyTitle">
+        <div id="dailyTitleID" class="dailyTitle">
             <h2>${title}</h2>
         </div>
-        <div class="paragraph">
+        <div id="paragraphID" class="paragraph">
             <p>${explanation}</p>
         </div>
-    </div>
     `;
 };
 
 const image = (img) => {
     return `
-        <div id="mediaContainer">
+        <div id="mediaContainerID">
             <img src="${img}"></img>
         </div>
     `
@@ -21,48 +30,11 @@ const image = (img) => {
 
 const video = (video) => {
     return `
-    <div id="mediaContainer">
-        <iframe src="${video}"></iframe>
-    </div>
+        <div id="mediaContainerID">
+            <iframe src="${video}"></iframe>
+        </div>
     `
 }
-
-//A function to fetch when the page loads
-const todayFetch = async () => {
-
-    let rootElement = document.getElementById("root");
-
-    const nasaApiKey = "miqERbSb62hxqg4SbPUozPDc1WtXjrIhv6V0NPfz";
-
-    const today = new Date();
-
-    const date = today.getFullYear() + '-' + (today.getMonth()+1) + '-' + today.getDate();
-
-    //console.log(date)
-    
-    const requestedDate = date; //pl 2022-4-8
-    
-    let todayString = today.toISOString()
-
-    const apod = await fetch(`https://api.nasa.gov/planetary/apod?api_key=${nasaApiKey}&date=${requestedDate}`);
-
-    const apodJson = await apod.json();
-
-    //console.log(apodJson)
-
-    const contentRight = document.getElementById("contentRight")
-
-    if (apodJson.media_type === "video"){
-        contentRight.insertAdjacentHTML("beforeend", video(apodJson.url));
-    }else{
-        contentRight.insertAdjacentHTML("beforeend", image(apodJson.url));
-    }
-
-    const contentLeft = document.getElementById("contentLeft")
-
-    contentLeft.insertAdjacentHTML("beforeend", text(apodJson.title, apodJson.explanation))
-}
-
 const datePicker = () => {
     
     const today = new Date();
@@ -73,9 +45,7 @@ const datePicker = () => {
         date = today.getFullYear() + '-0' + (today.getMonth()+1) + '-' + today.getDate();        
     }
 
-    let datePickerHTML = document.getElementById("datePickerContainer");
-
-    datePickerHTML =
+    let datePickerHTML =
     `
         <div id="datePickerContainer">
             <form class="datePicker">
@@ -86,7 +56,52 @@ const datePicker = () => {
         </div>        
     `;
 
-    return datePickerHTML
+    /* let contentRight = document.getElementById("contentRight")
+
+    contentRight.insertAdjacentHTML("beforeend", datePickerHTML); */
+    
+    return datePickerHTML;
+}
+
+//A function to fetch when the page loads
+const todayFetch = async () => {
+
+    const nasaApiKey = "miqERbSb62hxqg4SbPUozPDc1WtXjrIhv6V0NPfz";
+
+    const today = new Date();
+
+    console.log(today)
+
+    const date = today.getFullYear() + '-' + (today.getMonth()+1) + '-' + today.getDate();
+
+    console.log(date)
+
+    //console.log(date)
+    
+    const requestedDate = date; //pl 2022-4-8
+    
+    //let todayString = today.toISOString()
+
+    const apod = await fetch(`https://api.nasa.gov/planetary/apod?api_key=${nasaApiKey}&date=${requestedDate}`);
+
+    const apodJson = await apod.json();
+
+    //console.log(apodJson)
+
+    const contentLeft = document.getElementById("contentLeft")
+
+    contentLeft.insertAdjacentHTML("beforeend", text(apodJson.title, apodJson.explanation))
+
+    console.log(apodJson.explanation)
+
+    const contentRight = document.getElementById("contentRight")
+    /* contentRight.insertAdjacentHTML("beforeend", datePicker()) */
+
+    if (apodJson.media_type === "video"){
+        contentRight.insertAdjacentHTML("beforeend", video(apodJson.url));
+    }else{
+        contentRight.insertAdjacentHTML("beforeend", image(apodJson.url));
+    } 
 }
 
 //A function to get the value of the datepicker
@@ -102,36 +117,65 @@ const getValueOfPicker = () => {
 //A function to fetch a given date
 const chosenDateFetch = async () => {
 
-    let rootElement = document.getElementById("root");
-
     const nasaApiKey = "miqERbSb62hxqg4SbPUozPDc1WtXjrIhv6V0NPfz";
 
     const requestedDate = getValueOfPicker();
+
+    console.log(requestedDate)
 
     const apod = await fetch(`https://api.nasa.gov/planetary/apod?api_key=${nasaApiKey}&date=${requestedDate}`);
 
     const apodJson = await apod.json();
 
-    const container = document.getElementById('container');
+    console.log(apodJson.explanation)
+    console.log(apodJson.title)
+    console.log(apodJson.url)
 
-    container.remove();
+    const dailyTitle = document.getElementById("dailyTitleID")
+    const paragraph = document.getElementById("paragraphID")
+    const mediaContainer = document.getElementById("mediaContainerID")
+
+    console.log(dailyTitle)
+    console.log(paragraph)
+    console.log(mediaContainer)
+
+
+    dailyTitle.remove();
+    paragraph.remove();
+    mediaContainer.remove();
+
+    /* const container = document.getElementById("container") */
+    let contentLeft = document.getElementById("contentLeft")
+    console.log(contentLeft)
+    let contentRight = document.getElementById("contentRight")
+    /* contentRight.remove();
+    contentLeft.remove(); */
+
+    /* container.insertAdjacentHTML("beforeend", `
+    <div id="contentLeft"></div>
+    <div id="contentRight"></div>
+    `) */
+
+   /*  const contentLeft = document.getElementById("contentLeft")
+    const contentRight = document.getElementById("contentRight") */
+
+    contentLeft.insertAdjacentHTML("beforeend", text(apodJson.title, apodJson.explanation))
+
+    
 
     if (apodJson.media_type === "video"){
-        rootElement.insertAdjacentHTML("beforeend", htmlBodyWithVideo(apodJson.title, apodJson.explanation, apodJson.url));
+        contentRight.insertAdjacentHTML("beforeend", video(apodJson.url));
     }else{
-        rootElement.insertAdjacentHTML("beforeend", htmlBodyWithImg(apodJson.title, apodJson.explanation, apodJson.url));
+        contentRight.insertAdjacentHTML("beforeend", image(apodJson.url));
     }
-}
 
-const contentLeftAndRight = () => {
-    return `
-        <div class="mainTitle">
-            <span class="mainTitleLoader"></span>
-            <h1>What happened in space?</h1>
-        </div>
-        <div id="contentLeft"></div>
-        <div id="contentRight"></div>
-    `
+    
+    /* contentRight.remove();
+    contentLeft.remove(); */
+
+    /* const container = document.getElementById("container");
+    container.remove(); */
+    
 }
 
 const loadEvent = () => {
@@ -146,7 +190,8 @@ const loadEvent = () => {
     
     let contentRight = document.getElementById("contentRight");
     
-    contentRight.insertAdjacentHTML("afterend", datePicker());
+    contentRight.insertAdjacentHTML("beforeend", datePicker());
+
     //console.log(datePickerHTML)
 
     let picker = document.getElementById("datePick");
