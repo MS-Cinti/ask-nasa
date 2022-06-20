@@ -180,6 +180,24 @@ body{
   font-size: 1vw;
 }
 
+@media screen and (max-width: 1920px) {
+  #contentLeft{
+    width: 600px;
+    transform: translate(15%, 20%);
+  }
+
+  #contentRight{
+    width: 600px;
+    transform: translate(50%, -80%);
+  }
+
+  #datePickerContainer{
+    top: 110%;
+    left: 90%;
+    z-index: 99;
+  }
+}
+
 @media screen and (max-width: 1440px) {
   #contentLeft{
     width: 600px;
