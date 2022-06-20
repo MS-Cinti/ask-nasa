@@ -133,7 +133,7 @@ body{
   position: relative;
   width: 700px;
   height: 400px;
-  transform: translate(100%, -70%);
+  transform: translate(90%, -70%);
 }
 
 #mediaContainerID{
@@ -146,16 +146,13 @@ body{
 
 #mediaContainerID img{
   object-fit: scale-down;
-  max-width: 100%;
-  max-height: 100%;
+  max-width: 120%;
+  max-height: 120%;
 }
 
 #mediaContainerID iframe{
-  position: absolute;
-  left: 50%;
-  bottom: 30%;
-  height: 50%;
-  width: 50%;
+  height: 100%;
+  width: 100%;
   border: transparent;
 }
 
@@ -169,22 +166,6 @@ body{
 }
 
 #datePickerContainer .datePicker{
-  z-index: 99;
   font-family: 'Garamond', serif;
   font-size: 1vw;
-}
-
-#datePickerContainer .datePicker select{
-  display: inline-block;
-  font-size: 1vw;
-  height: 2vw;
-  width: 12vw;
-  margin: 8px 0;
-  transition: 0.1s;
-  outline: none;
-  border-radius: 4px;   
-}
-
-#datePickerContainer .datePicker select:focus{
-  border: 3px solid #555;
 }
