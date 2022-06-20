@@ -1,5 +1,8 @@
 const contentLeftAndRight = () => {
     return `
+        <video autoplay muted loop id="myVideo">
+            <source src="./video.mp4" type="video/mp4">
+        </video>
         <div class="mainTitle">
             <span class="mainTitleLoader"></span>
             <h1>What happened in space?</h1>

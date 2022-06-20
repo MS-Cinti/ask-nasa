@@ -6,6 +6,16 @@ body{
   font-family: 'Garamond', serif;
 }
 
+#myVideo{
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  object-fit: cover;
+  opacity: 0.5;
+}
+
 .mainTitle{
   position: relative;
   width: 100%;
@@ -168,4 +178,99 @@ body{
 #datePickerContainer .datePicker{
   font-family: 'Garamond', serif;
   font-size: 1vw;
+}
+
+@media screen and (max-width: 1440px) {
+  #contentLeft{
+    width: 600px;
+    transform: translate(15%, 40%);
+  }
+
+  #contentRight{
+    width: 600px;
+    transform: translate(50%, -70%);
+  }
+
+  #datePickerContainer{
+    top: 120%;
+    left: 90%;
+    z-index: 99;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .mainTitleLoader{
+    display: none;
+  }
+
+  .mainTitle{
+    width: 90vw;
+    height: 10vw;
+    transform: translate(0, 10%);
+  }
+
+  .mainTitle h1{
+    font-size: 5vw;
+    opacity: 1;
+    animation: none;
+  }
+
+  #contentLeft{
+    width: 100vw;
+    height: 400px;
+    transform: translate(3%, 10%);
+  }
+
+  #dailyTitleID{
+    width: 100%;
+    height: 10vw;
+  }
+
+  #dailyTitleID h2{
+    font-size: 4vw;
+    padding: 2vw;
+    margin: auto;
+    border: solid 3px #fc0;
+    animation: 1.5s ease-in-out both running appearBorder;
+  }
+
+  #paragraphID{
+    max-width: 90%;
+    max-height: 100%;
+    transform: translate(0, 40%);
+  }
+
+  #paragraphID p{
+    text-align: justify;
+    font-size: 3vw;
+    line-height: 4vw;
+  }
+
+  #contentRight{
+    width: 100vw;
+    height: 50vw;
+    transform: translate(3%, 10%);
+  }
+
+  #mediaContainerID{
+    width: 80vw;  
+    height: 50vw;
+    left: 15%;
+    top: 30%;
+  }
+
+  #mediaContainerID img{
+    max-width: 90%;
+    max-height: 90%;
+  }
+
+  #mediaContainerID iframe{
+    transform: translate(-12%, -10%);
+  }
+
+  #datePickerContainer{
+    top: 140%;
+    left: 30%;
+    z-index: 99;
+  }
 }
