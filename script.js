@@ -70,11 +70,11 @@ const todayFetch = async () => {
 
     const today = new Date();
 
-    console.log(today)
+    /* console.log(today) */
 
     const date = today.getFullYear() + '-' + (today.getMonth()+1) + '-' + today.getDate();
 
-    console.log(date)
+    /* console.log(date) */
 
     //console.log(date)
     
@@ -121,23 +121,23 @@ const chosenDateFetch = async () => {
 
     const requestedDate = getValueOfPicker();
 
-    console.log(requestedDate)
+    /* console.log(requestedDate) */
 
     const apod = await fetch(`https://api.nasa.gov/planetary/apod?api_key=${nasaApiKey}&date=${requestedDate}`);
 
     const apodJson = await apod.json();
 
-    console.log(apodJson.explanation)
+    /* console.log(apodJson.explanation)
     console.log(apodJson.title)
-    console.log(apodJson.url)
+    console.log(apodJson.url) */
 
     const dailyTitle = document.getElementById("dailyTitleID")
     const paragraph = document.getElementById("paragraphID")
     const mediaContainer = document.getElementById("mediaContainerID")
 
-    console.log(dailyTitle)
+    /* console.log(dailyTitle)
     console.log(paragraph)
-    console.log(mediaContainer)
+    console.log(mediaContainer) */
 
 
     dailyTitle.remove();
@@ -146,7 +146,7 @@ const chosenDateFetch = async () => {
 
     /* const container = document.getElementById("container") */
     let contentLeft = document.getElementById("contentLeft")
-    console.log(contentLeft)
+    /* console.log(contentLeft) */
     let contentRight = document.getElementById("contentRight")
     /* contentRight.remove();
     contentLeft.remove(); */
