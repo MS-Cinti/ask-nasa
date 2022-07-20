@@ -181,11 +181,20 @@ body{
 }
 
 @media screen and (max-width: 1920px) {
+
   #contentLeft{
     width: 600px;
     transform: translate(15%, 20%);
   }
 
+  /*#paragraphID{
+    transform: translate(0, 30%);
+  }
+
+  #paragraphID p{
+    font-size: 1.3vw;
+  }
+*/
   #contentRight{
     width: 600px;
     transform: translate(50%, -80%);
